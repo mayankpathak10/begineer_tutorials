@@ -18,3 +18,25 @@ git clone -b Week10_HW https://github.com/mayankpathak10/beginner_tutorials.git
 cd ..
 catkin_make
 ```
+
+## Dependencies
+
+* ROS Kinetic
+* Catkin
+* roscpp package
+* std_msgs package
+* genmsg package
+
+## How to run
+
+* In a first terminal run:
+
+```
+roscore
+```
+* In a second terminal:
+```
+cd ros_ws
+source devel/setup.bash
+rosrun <the package file>
+```
