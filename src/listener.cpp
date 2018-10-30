@@ -16,7 +16,7 @@
  *@param msg is the message received from the talker node
  */
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
-  ROS_INFO("Message Received by Subscriber, " << msg->data.c_str() << "times");
+  ROS_INFO("Message Received by Subscriber, [%s] ", msg->data.c_str(), "times");
 }
 
 /**
