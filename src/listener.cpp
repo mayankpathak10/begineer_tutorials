@@ -1,12 +1,30 @@
+/**
+ *
+ *@copyright Copyright 2018 Mayank Pathak
+ *@file listener.cpp
+ *@author Mayank  Pathak
+ *@brief This file is a part of tutorial that demonstrates
+ *       simple receipt of messages over the ROS system.
+ *       ROS listener node that receives messages.
+ */
+
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
 /**
- * This tutorial demonstrates simple receipt of messages over the ROS system.
+ *@brief Function that reads the message and outputs it
+ *@param msg is the message received from the talker node
  */
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
-  ROS_INFO("Message Received by Subscriber.");// " [%s]", msg->data.c_str());
+  ROS_INFO("Message Received by Subscriber, " << msg->data.c_str() << "times");
 }
+
+/**
+ * @brief The main function is where the listener node is created
+ * @param argc is the number of input arguments
+ * @param argv is the arguments
+ * @return 0 if everything works
+ */
 
 int main(int argc, char **argv) {
   /**

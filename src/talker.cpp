@@ -1,6 +1,10 @@
 /**
- *
- * @brief      { This tutorial demonstrates simple sending of messages over the ROS system. }
+ *@copyright Copyright 2018 Mayank Pathak
+ *@file talker.cpp
+ *@author Mayank Pathak
+ *@brief This file is a part of tutorial that demonstrates
+ *       simple receipt of messages over the ROS system.
+ *       ROS listener node that receives messages.
  */
 
 #include <sstream>
@@ -8,14 +12,11 @@
 #include "std_msgs/String.h"
 
 
-
 /**
- * @brief      { Main function to implement the publisher node }
- *
- * @param[in]  argc  The argc
- * @param      argv  The argv
- *
- * @return     { return 0 }
+ * @brief The main function is where the talker node is created
+ * @param argc is the number of input arguments
+ * @param argv is the publisher frequency, given as argument through command line.
+ * @return 0 if everything works
  */
 int main(int argc, char **argv) {
   /**
@@ -70,7 +71,8 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "ENPM 808X: Publisher running!! " << count;
+    ss << "ENPM 808X: Publisher(talker) Node running!! Message #" <<
+       count << "Published";
     msg.data = ss.str();
 
     // ROS_INFO("%s", msg.data.c_str());
