@@ -29,8 +29,12 @@ SOFTWARE.
  *       ROS listener node that receives messages.
  */
 
+#include <string>
+#include <sstream>
+#include <ros/console.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/service.h"
 
 /**
  *@brief Function that reads the message and outputs it
@@ -38,6 +42,7 @@ SOFTWARE.
  */
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
   ROS_INFO("Message Received by Subscriber, [%s] ", msg->data.c_str(), "times");
+  ROS_DEBUG_STREAM("Callback accessed!");
 }
 
 /**

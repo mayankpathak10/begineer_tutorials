@@ -29,15 +29,13 @@ SOFTWARE.
  *       ROS listener node that receives messages.
  */
 
+#include <string>
 #include <sstream>
 #include "ros/ros.h"
-#include "ros/console.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/service.h"
 
-
-// Default Output String
-std::string modified = "ENPM 808X: Service trial";
+std::string custom_string = "Custom String Inserted. Message# ";
 
 /**
  *@brief Function that provides the service that changes the string published by the talker node.
@@ -45,14 +43,13 @@ std::string modified = "ENPM 808X: Service trial";
  *@param res is the response type defined in the srv file
  *@return true if everything works
  */
-bool new_string(beginner_tutorials::service::Request  &req,  // NOLINT
-                beginner_tutorials::service::Response &res) {  // NOLINT
-	modified = req.a;  // "a" is the input string in the service
-	res.b = modified;  // "b" is the output string of the service
-	ROS_INFO_STREAM("ENPM 808X: talker Node Service running!! Message #");
+bool change_string(beginner_tutorials::service::Request  &req,  // NOLINT
+                   beginner_tutorials::service::Response &res) {  // NOLINT
+	custom_string = req.a;  // "a" is the input string in the service
+	res.b = custom_string;  // "b" is the output string of the service
+	ROS_INFO_STREAM("Custom String is being updated");
 	return true;
 }
-
 
 /**
  * @brief The main function is where the talker node is created
@@ -101,8 +98,7 @@ int main(int argc, char **argv) {
 
 	// Create the service and advertise over ROS
 	ros::ServiceServer service = n.advertiseService
-	                             ("new_string", new_string);
-
+	                             ("change_string", change_string);
 
 	// Publishing frequency is given as an argument in tutorial.launch
 	int freq;
@@ -111,17 +107,17 @@ int main(int argc, char **argv) {
 	if (freq <= 0)
 		ROS_ERROR_STREAM("Invalid publisher frequency");
 
-	// DEBUG and INFO Logging level check
-	ROS_DEBUG_STREAM("Publisher frequency set up to: " << freq);
-	ROS_INFO_STREAM("Publisher frequency set up to: " << freq);
+	// DEBUG Logging level check
+	ROS_DEBUG_STREAM("Publisher frequency set to: " << freq);
+	ROS_INFO_STREAM("Set Publisher frequency value upto(Hz): " << 20);
 
 	// WARN Logging level check
-	if (freq > 20)
-		ROS_WARN_STREAM("Frequency more than optimal!!");
+	if (freq <= 2)
+		ROS_WARN_STREAM("Frequency too low. Please set to atleast 5 Hz");
 
 	ros::Rate loop_rate(freq);
 
-	// Condition to implement severity level 5.
+	// If ROS
 	if (!ros::ok())
 		ROS_FATAL_STREAM("ROS node not running...");
 
@@ -137,12 +133,12 @@ int main(int argc, char **argv) {
 		std_msgs::String msg;
 
 		std::stringstream ss;
-		ss << new_string <<
+		ss << custom_string <<
 		   count << " Published";
 		msg.data = ss.str();
 
 		// ROS_INFO("%s", msg.data.c_str());
-		ROS_INFO("%s", msg.data.c_str());
+		ROS_INFO(msg.data.c_str());
 
 		/**
 		 * The publish() function is how you send messages. The parameter
