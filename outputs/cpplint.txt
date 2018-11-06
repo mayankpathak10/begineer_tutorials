@@ -1,4 +1,5 @@
-mp@mp:~/catkin_ws$ cpplint src/beginner_tutorials/src/listener.cpp 
-Done processing src/beginner_tutorials/src/listener.cpp
-mp@mp:~/catkin_ws$ cpplint src/beginner_tutorials/src/talker.cpp 
-Done processing src/beginner_tutorials/src/talker.cpp
+mp@mp:~/catkin_ws/src/beginner_tutorials$ cpplint src/listener.cpp 
+Done processing src/listener.cpp
+mp@mp:~/catkin_ws/src/beginner_tutorials$ cpplint src/talker.cpp 
+Done processing src/talker.cpp
+
