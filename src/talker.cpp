@@ -102,14 +102,15 @@ int main(int argc, char **argv) {
 
 	// Publishing frequency is given as an argument in tutorial.launch
 	int freq;
+	ROS_INFO_STREAM("Set Publisher frequency value upto(Hz): " << 20);
 	freq = std::atoi(argv[1]);  // give frequency the value of argument
 	// ERROR Logging level check
-	if (freq <= 0)
+	if (freq <= 1)
 		ROS_ERROR_STREAM("Invalid publisher frequency");
 
 	// DEBUG Logging level check
 	ROS_DEBUG_STREAM("Publisher frequency set to: " << freq);
-	ROS_INFO_STREAM("Set Publisher frequency value upto(Hz): " << 20);
+
 
 	// WARN Logging level check
 	if (freq <= 2)
