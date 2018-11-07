@@ -55,13 +55,13 @@ roscore
 ```
 cd ros_ws
 source devel/setup.bash
-rosrun beginner_tutorials talker
+rosrun beginner_tutorials talker 10
 ```
 * In a third terminal:
 ```
 cd ros_ws
 source devel/setup.bash
-rosrun beginner_tutorials listner
+rosrun beginner_tutorials listener
 ```
 
 The output of talker node will look like:
