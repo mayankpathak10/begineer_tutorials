@@ -52,6 +52,8 @@ catkin_package(
   DEPENDS system_lib
 )
 
+#catkin_package()
+
 #####################################
 ## Build  talker and listener nodes##
 #####################################
