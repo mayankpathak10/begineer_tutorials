@@ -149,3 +149,48 @@ catkin_make run_tests
 This will compile the tests and the terminal should output the results of the tests as shown:
 
 ![tf_outputs](https://github.com/mayankpathak10/beginner_tutorials/blob/Week11_HW/outputs/gtest.png)
+
+## Using Rosbag to record data
+
+To record the talker message stream using rosbag, we have to launch the updated `beginner_tutorials.launch`. A new argument called _rosbagFlag_ is included in the launch file. When called as _true_ the data will be recorded. If called as _false_ or not given in argument of launch while running launch file  the data will not be recorded.
+
+* To record data:
+
+```
+cd ~/ros_ws
+source devel/setup.bash
+roslaunch beginner_tutorials tutorial.launch rosbagFlag:=true
+```
+This will record the data in the `~/.ros` folder. To check information saved in bag file, use the following command:
+
+```
+cd ~/.ros
+rosbag info bagfile.bag
+```
+the output looks like:
+![tf_outputs](https://github.com/mayankpathak10/beginner_tutorials/blob/Week11_HW/outputs/rosbagfile.png)
+
+
+* If the data recording is not needed, just launch:
+
+```
+roslaunch beginner_tutorials beginner_tutorials.launch rosbagFlag:=false frequency:=5
+```
+or
+```roslaunch beginner_tutorials beginner_tutorials.launch rosbagFlag:=false```
+
+## Bag file demonstration with ONLY listener Node
+
+Once the bag file is generated, it can be used as data to be sent to the listener. To try this, in a first terminal run the listener node (with roscore running already):
+
+```
+cd ~/ros_ws
+source devel/setup.bash
+rosrun beginner_tutorials listener
+```
+In a second terminal, 
+```
+cd ~/.ros
+rosbag play bagfile.bag`
+```
+This will run the rosbag and the listener will start receiving the data sent by `bagfile.bag`.
