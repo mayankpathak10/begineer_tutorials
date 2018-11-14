@@ -103,3 +103,49 @@ source ./devel/setup.bash
 rosservice call /change_string stringName
 ```
 Previous string will be replaced by the new string ```stringName```.
+
+## Verifying Transformation(TF) frames
+
+To verify that the TF frames were correctly created, two different commands can be executed:
+
+### tf_echo
+First run the talker node in a terminal 
+`rosrun beginner_tutorials talker <frequencyvalue>`
+and then run tf_echo in another terminal:
+`rosrun tf tf_echo world talk`
+
+### rqt_tf_tree
+The second way is to use rqt_tf_tree. With the talker node running in a terminal
+`rosrun beginner_tutorials talker <frequencyvalue>`
+run the follwing command in a another terminal:
+```
+rosrun rqt_tf_tree rqt_tf_tree 
+```
+or simply
+```
+rqt &
+```
+The output looks as below:
+![tf_outputs](https://github.com/mayankpathak10/beginner_tutorials/blob/Week11_HW/outputs/tf_echoAndrqt_tree.png)
+
+
+### To view the tf frames and export as pdf
+Run following command to generate pdf using view_frames tool
+```
+rosrun tf view_frames
+```
+It will generate a file named frames.pdf in pwd.
+
+## Running rostest
+
+To run rostest, we do not need to run any node. In a terminal go to your ros_ws directory and run the next commands:
+
+```
+cd ~/ros_ws
+source devel/setup.bash
+catkin_make run_tests
+```
+
+This will compile the tests and the terminal should output the results of the tests as shown:
+
+![tf_outputs](https://github.com/mayankpathak10/beginner_tutorials/blob/Week11_HW/outputs/gtest.png)
