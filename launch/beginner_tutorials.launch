@@ -10,4 +10,9 @@
 		 output= "screen">
 	</node>
 
+	<node pkg = "rosbag" name= "rosbag_record_all" type= "record"
+  		args = "-a -O bagfile" output = "screen" 
+  		if="$(eval rosbagFlag == true)">
+  	</node>
+
 </launch>
