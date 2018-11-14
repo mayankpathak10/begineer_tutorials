@@ -29,6 +29,7 @@ SOFTWARE.
  *       ROS listener node that receives messages.
  */
 
+#include <tf/transform_broadcaster.h>
 #include <string>
 #include <sstream>
 #include "ros/ros.h"
@@ -78,6 +79,9 @@ int main(int argc, char **argv) {
      */
     ros::NodeHandle nh;
 
+    // Broadcaster object to send transformation information
+    static tf::TransformBroadcaster br;
+
     /**
      * The advertise() function is how you tell ROS that you want to
      * publish on a given topic name. This invokes a call to the ROS
@@ -95,6 +99,15 @@ int main(int argc, char **argv) {
      * than we can send them, the number here specifies how many messages to
      * buffer up before throwing some away.
      */
+
+
+    tf::Transform transform;
+    transform.setOrigin(tf::Vector3(5, 6, 0.0));
+    tf::Quaternion q;
+    q.setRPY(0, 0.7, 0);
+    transform.setRotation(q);
+
+
     ros::Publisher chatter_pub =
         nh.advertise<std_msgs::String>("chatter", 1000);
 
@@ -141,7 +154,7 @@ int main(int argc, char **argv) {
         msg.data = ss.str();
 
         // ROS_INFO("%s", msg.data.c_str());
-        ROS_INFO(msg.data.c_str());
+        ROS_INFO("%s\n", msg.data.c_str());
 
         /**
          * The publish() function is how you send messages. The parameter
@@ -150,6 +163,9 @@ int main(int argc, char **argv) {
          * in the constructor above.
          */
         chatter_pub.publish(msg);
+
+        br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
+                                              "/world", "/talk"));
 
         ros::spinOnce();
 
