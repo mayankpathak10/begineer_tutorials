@@ -100,7 +100,7 @@ int main(int argc, char **argv) {
      * buffer up before throwing some away.
      */
 
-
+    // transform object
     tf::Transform transform;
     transform.setOrigin(tf::Vector3(5, 6, 0.0));
     tf::Quaternion q;
@@ -163,7 +163,7 @@ int main(int argc, char **argv) {
          * in the constructor above.
          */
         chatter_pub.publish(msg);
-
+        // sending transform information
         br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
                                               "/world", "/talk"));
 
